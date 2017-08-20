@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -e
+
+# Open the iOS Simulator with a specific device
+
+dirname="$(dirname "$(which "$0")")"
+udid=$($dirname/udid $1)
+
+(killall Simulator && echo "Killed existing simulator") || echo "Did not kill existing simulator"
+open -a Simulator --args -CurrentDeviceUDID $udid && echo $udid

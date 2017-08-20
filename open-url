@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -e
+
+# Open a URL in the device currently running in the iOS Simulator
+
+dirname="$(dirname "$(which "$0")")"
+
+udid="$($dirname/booted)"
+url=$1
+
+xcrun simctl openurl $udid $url && open -a Simulator

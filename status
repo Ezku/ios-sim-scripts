@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -e
+
+# List available iOS Simulator devices with name, udid and state
+
+xcrun simctl list -j \
+  | jq -r '.devices | flatten | map(select(.availability=="(available)") | "\(.name)\t\(.udid)\t\(.state)") | .[]'

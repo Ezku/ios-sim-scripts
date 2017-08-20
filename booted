@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -e
+
+# Get the UDID string for the first booted device, if any
+
+xcrun simctl list -j \
+  | jq -r '.devices | flatten | map(select(.state=="Booted")) | first | .udid'

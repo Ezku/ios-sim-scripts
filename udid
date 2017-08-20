@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -e
+
+# Get the UDID string for the first device whose name matches a given argument
+
+xcrun simctl list -j \
+  | jq -r '.devices | flatten | map(select(.availability=="(available)") | select(.name | test("'"$1"'"; "in"))) | first | .udid'
